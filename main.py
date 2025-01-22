@@ -7,6 +7,7 @@ from io import BytesIO
 from PIL import Image
 from typing import Tuple
 import tensorflow as tf
+from keras.layers import TFSMLayer
 
 app = FastAPI()
 
@@ -20,7 +21,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-MODEL = tf.keras.models.load_model("model/1")
+MODEL = TFSMLayer("model/1", call_endpoint="serving_default")
 CLASS_NAMES = ['basal cell carcinoma', 'melanoma', 'squamous cell carcinoma']
 
 @app.get("/ping")
